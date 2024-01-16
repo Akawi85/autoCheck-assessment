@@ -58,11 +58,11 @@ x-airflow-common:
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- pandas requests boto3 botocore SQLAlchemy}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- pandas openpyxl psycopg2-binary pyarrow requests boto3 botocore SQLAlchemy}
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
-    - ./plugins:/opt/airflow/plugins
+    - ./sql_scripts:/opt/airflow/sql_scripts
     - ./data:/opt/airflow/data
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -81,6 +81,8 @@ services:
       POSTGRES_DB: airflow
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 5s
