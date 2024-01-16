@@ -1,5 +1,33 @@
 # Autocheck Assessment solutions 1 & 2
 
+### Solution 1
+
+##### Brief explanation of how the code works
+The code works by manually downloading the sample files from the provided URL and loading them into a postgres database instance running on Airflow.  
+
+This step is crucial as it allows for writing SQL queries to transform the data after it has been loaded to the database. The [transformations script](sql_scripts/query.sql) written in SQL gets the data in the required shape. After which the transformed data is saved to the data directory as [output_name](data/output_name.xlsx)
+
+The Entire process of loading to postgres, transforming with SQL is implemented in the python script [solution1_write_to_postgres_database](dags/scripts/solution1_write_to_postgres_database.py)
+
+**Note: Some errors were observed in the sample data provided such as***
+- *maturity_date Throwing an out of range for value "02/29/2023"*
+- *A mixup in column names `Amount_paid` and `Date_Paid` for the Repayment_Data dataset*
+- *The requested fields `branch`, `branch_id` and `borrower_name` were not found in any of the datasets provided*
+
+### Steps to replicate solution 1
+- Ensure you have docker up and running on your machine 
+- Ensure you have installed docker compose on your machine. Follow the [link](https://docs.docker.com/compose/install/) to install docker compose for your operating system if you don't have it installed already  
+- Clone this repository to your local machine by running the command `git clone https://github.com/Akawi85/autoCheck-assessment.git`
+- `cd` into the project directory
+- Run the following command in you terminal `docker compose up` and wait until docker finishes downloading the necessary files and setting up the airflow UI 
+- Wait until you see the message `Listening at: http://0.0.0.0:8080` as part of the log output on your terminal. This may take some time  
+- Follow the link above or copy it and paste in your browser  
+- You'll be prompted to enter a username and password on the airflow web browser UI, for these use `airflow` for both username and password fields.  
+- The `Solution_One_Pipeline` DAG is paused by default, unpause the DAG to trigger it  
+- The `Solution_One_Pipeline` DAG has just one task and takes approximately 10 seconds to run successfully.  
+- On successful completion of the DAG run, you should have a screen similar to this and find the file `output_name.xlsx` in your local `data` directory of the project:
+
+![This](Solution1_DAG_success_image.jpeg)
 
 ### Solution 2
 
@@ -33,5 +61,5 @@ A looker studio dashboard with public viewing access was also created. See **[he
 - The `Exchange_Rates_ETL_Pipeline` DAG has 4 tasks that run in sequence and triggers a bunch of other processes and takes approximately 1 minute to run successfully.  
 - On successful completion of the DAG run, you should have a screen similar to  this:
 
-![this](DAG_success_image.jpeg)
+![this](Solution2_DAG_success_image.jpeg.jpeg)
 - Make sure to click on the following **[Looker Studio Link](https://lookerstudio.google.com/reporting/7ee2e4f2-2b33-4f7d-9425-bf0dda635370)** to see the data in a looker studio report
