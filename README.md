@@ -3,7 +3,8 @@
 
 ### Solution 2
 
-The following ETL architecture was implemented for this architecture  
+The following ETL architecture was implemented for this solution:
+
 ![ETL Diagram](XE_Daily_USD_Exchange_Rates_Architecture_2.jpeg) . 
 
 ##### Brief explanation of how the code works
@@ -31,5 +32,6 @@ A looker studio dashboard with public viewing access was also created. See **[he
 - The `Exchange_Rates_ETL_Pipeline` DAG is paused by default, unpause the DAG to trigger it  
 - The `Exchange_Rates_ETL_Pipeline` DAG has 4 tasks that run in sequence and triggers a bunch of other processes and takes approximately 1 minute to run successfully.  
 - On successful completion of the DAG run, you should have a screen similar to  this:
+
 ![this](DAG_success_image.jpeg)
 - Make sure to click on the following **[Looker Studio Link](https://lookerstudio.google.com/reporting/7ee2e4f2-2b33-4f7d-9425-bf0dda635370)** to see the data in a looker studio report
