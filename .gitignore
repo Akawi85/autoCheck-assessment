@@ -1,0 +1,5 @@
+cleanup/
+logs/
+data/
+plugins/
+__pycache__*
