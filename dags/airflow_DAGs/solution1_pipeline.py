@@ -8,8 +8,6 @@ from sqlalchemy import create_engine
 sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
 from scripts.solution1_script import main
 
-query_file_path='/opt/airflow/sql_scripts'
-
 postgres_hostname='postgres'
 postgres_username='airflow'
 postgres_password='airflow'
