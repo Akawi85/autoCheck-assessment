@@ -2,16 +2,16 @@
 
 ### Solution 1
 
-##### Brief explanation of how the code works
-The code works by manually downloading the sample files from the provided URL and loading them into a postgres database instance running on Airflow.  
+##### Brief explanation of how Problem Statement 1 code works
+The Sample assessment datasets were manually downloaded from the provided Links and loaded into a postgres database instance running on Airflow.  
 
-This step is crucial as it allows for writing SQL queries to transform the data after it has been loaded to the database. The [transformations script](sql_scripts/query.sql) written in SQL gets the data in the required shape. After which the transformed data is saved to the data directory as [output_name](data/output_name.xlsx)
+This step is crucial as it allows for writing SQL queries to transform the data after it has been loaded to the database. The [transformations script](sql_scripts/query.sql) written in SQL gets the data in the required shape and answers the business questions. After which the transformed data is saved to the data directory as [output_name.xlsx](data/output_name.xlsx)
 
-The Entire process of loading to postgres, transforming with SQL is implemented in the python script [solution1_write_to_postgres_database](dags/scripts/solution1_write_to_postgres_database.py)
+The Entire process of loading to postgres, transforming with SQL and writing to a local file is implemented in the python script [solution1_script.py](dags/scripts/solution1_script.py)
 
-**Note: Some errors were observed in the sample data provided such as***
-- *maturity_date Throwing an out of range for value "02/29/2023"*
-- *A mixup in column names `Amount_paid` and `Date_Paid` for the Repayment_Data dataset*
+***Note: Some errors were observed in the sample data provided such as***
+- *`maturity_date` from the `Loan_Data` dataset throws an out of range for value "02/29/2023". This is because february 2023 has only 28 days*
+- *A mixup in column names `Amount_paid` and `Date_paid` for the `Repayment_Data` dataset*
 - *The requested fields `branch`, `branch_id` and `borrower_name` were not found in any of the datasets provided*
 
 ### Steps to replicate solution 1
@@ -35,7 +35,7 @@ The following ETL architecture was implemented for this solution:
 
 ![ETL Diagram](XE_Daily_USD_Exchange_Rates_Architecture_2.jpeg) . 
 
-##### Brief explanation of how the code works
+##### Brief explanation of how Problem Statement 2 code works
 The Entire is code is run in a docker container to avoid the problem of code working on certain machines and not on others.  
 
 The first step involves pulling data from "xecdapi convert_from" API by creating an account on the [site](https://currencydata.xe.com/account/dashboard) and generating an `Account API ID` and `Account API Key`. This step was implemented in the [Extract layer script](dags/scripts/solution2_extract.py) .  
@@ -61,5 +61,5 @@ A looker studio dashboard with public viewing access was also created. See **[he
 - The `Exchange_Rates_ETL_Pipeline` DAG has 4 tasks that run in sequence and triggers a bunch of other processes and takes approximately 1 minute to run successfully.  
 - On successful completion of the DAG run, you should have a screen similar to  this:
 
-![this](Solution2_DAG_success_image.jpeg.jpeg)
+![this](Solution2_DAG_success_image.jpeg)
 - Make sure to click on the following **[Looker Studio Link](https://lookerstudio.google.com/reporting/7ee2e4f2-2b33-4f7d-9425-bf0dda635370)** to see the data in a looker studio report
