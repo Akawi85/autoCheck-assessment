@@ -6,7 +6,7 @@ import sys
 import os
 from sqlalchemy import create_engine
 sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
-from scripts.solution1_write_to_postgres_database import main
+from scripts.solution1_script import main
 
 query_file_path='/opt/airflow/sql_scripts'
 
