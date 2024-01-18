@@ -64,4 +64,4 @@ A looker studio dashboard with public viewing access was also created. See **[he
 ![this](Solution2_DAG_success_image.jpeg)
 - Make sure to click on the following **[Looker Studio Link](https://lookerstudio.google.com/reporting/7ee2e4f2-2b33-4f7d-9425-bf0dda635370)** to see the data in a looker studio report
 
-***Note: As part of the solution to problem statement 2 of the assessment, the free XE API service expires after 7days of creation. It is necessary to point out that after the API expires, further calls to the API may be restricted causing the entire ETL pipeline to fail***
+***Note: As part of the solution to problem statement 2 of the assessment, the free XE API service expires after 7days of creation. It is necessary to point out that after the API expires, further calls to the API may be restricted causing the entire ETL pipeline to fail. Therefore it is important that the solution is reviewed before the API expiration***
